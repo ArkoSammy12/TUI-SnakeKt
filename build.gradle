@@ -1,0 +1,31 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.9.23'
+    id 'java'
+}
+
+group = 'xd.arkosammy'
+version = ''
+
+repositories {
+    mavenCentral()
+}
+
+jar {
+    archiveBaseName = "TUI-Snake"
+    manifest {
+        attributes("Manifest-Version": 1.0, "Main-Class" : "xd.arkosammy.snake.Main")
+    }
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}
+
+dependencies {
+    implementation 'com.googlecode.lanterna:lanterna:3.2.0-alpha1'
+}
+kotlin {
+    jvmToolchain(21)
+}
